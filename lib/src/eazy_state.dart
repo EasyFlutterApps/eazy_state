@@ -5,12 +5,12 @@ import 'dart:async';
 /// This class allows you to manage a single piece of state and notify listeners
 /// about changes to that state via a stream. It also provides a mechanism to
 /// update the state and automatically notify all listeners.
-class SimpleState<T> {
-  /// Creates a [SimpleState] with the given initial state.
+class EazyState<T> {
+  /// Creates a [EazyState] with the given initial state.
   ///
   /// The initial state is used to set the initial value of the state and is
   /// provided to the stream controller to emit the initial value.
-  SimpleState(T initialState)
+  EazyState(T initialState)
       : _value = initialState,
         _controller = StreamController<T>.broadcast() {
     /// Set the onCancel callback to properly dispose of the controller.

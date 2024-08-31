@@ -1,5 +1,5 @@
+import 'package:eazy_state/eazy_state.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_state/simple_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-final counterState = SimpleState(10.0);
+final counterState = EazyState(10.0);
 
 class MySimplePage extends StatelessWidget {
   const MySimplePage({super.key});
@@ -41,7 +41,7 @@ class MySimplePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            SimpleBuilder(
+            EazyBuilder(
                 state: counterState,
                 builder: (context, count) {
                   return Text(
@@ -86,7 +86,7 @@ class MySimplePageSecond extends StatelessWidget {
             const Text(
               '2 Page',
             ),
-            SimpleBuilder(
+            EazyBuilder(
                 state: counterState,
                 builder: (context, count) {
                   return Text(

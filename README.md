@@ -14,7 +14,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  simple_state: ^0.1.0+1
+  eazy_state: ^0.1.0+1
 ```
 
 Then, run flutter pub get to install the package.
@@ -26,7 +26,7 @@ Then, run flutter pub get to install the package.
 SimpleState is a class that holds a value and provides a stream for updates. It allows you to manage state and notify listeners about changes.
 
 ```dart
-import 'package:simple_state/simple_state.dart';
+import 'package:eazy_state/eazy_state.dart';
 
 final counterState = SimpleState(0);
 
@@ -41,7 +41,7 @@ SimpleBuilder is a widget that rebuilds when the SimpleState value changes. It l
 
 ```dart
 import 'package:flutter/widgets.dart';
-import 'package:simple_state/simple_state.dart';
+import 'package:eazy_state/eazy_state.dart';
 
 class CounterWidget extends StatelessWidget {
   final SimpleState<int> counterState;
@@ -186,4 +186,4 @@ Feel free to open issues or submit pull requests on GitHub.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/EasyFlutterApps/simple_state/blob/main/LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT License](https://github.com/EasyFlutterApps/eazy_state/blob/main/LICENSE) - see the LICENSE file for details.

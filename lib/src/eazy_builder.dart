@@ -1,28 +1,28 @@
+import 'package:eazy_state/src/eazy_state.dart';
 import 'package:flutter/widgets.dart';
-import 'package:simple_state/src/simple_state.dart';
 
 /// A widget that rebuilds when the state value changes.
 ///
-/// The [SimpleBuilder] widget listens to changes in a [SimpleState] and rebuilds
+/// The [EazyBuilder] widget listens to changes in a [EazyState] and rebuilds
 /// itself whenever the state value updates. It uses a [StreamBuilder] to listen
 /// to the state stream and trigger rebuilds with the latest state value.
-class SimpleBuilder<T> extends StatelessWidget {
-  /// Creates a [SimpleBuilder] with the given [state] and [builder] function.
+class EazyBuilder<T> extends StatelessWidget {
+  /// Creates a [EazyBuilder] with the given [state] and [builder] function.
   ///
-  /// The [state] parameter is the instance of [SimpleState] that this widget
+  /// The [state] parameter is the instance of [EazyState] that this widget
   /// will listen to for state changes. The [builder] function is used to build
   /// the widget tree based on the current state value.
-  const SimpleBuilder({
+  const EazyBuilder({
     required this.state,
     required this.builder,
     super.key,
   });
 
-  /// The [SimpleState] instance that this widget listens to.
+  /// The [EazyState] instance that this widget listens to.
   ///
-  /// The [SimpleBuilder] uses this [state] to listen for updates and rebuild
+  /// The [EazyBuilder] uses this [state] to listen for updates and rebuild
   /// the widget tree when the state changes.
-  final SimpleState<T> state;
+  final EazyState<T> state;
 
   /// The function that builds the widget tree based on the state value.
   ///

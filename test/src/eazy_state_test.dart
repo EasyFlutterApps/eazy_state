@@ -1,23 +1,23 @@
 // ignore_for_file: cascade_invocations
 
+import 'package:eazy_state/eazy_state.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_state/simple_state.dart';
 
 void main() {
   group('SimpleState', () {
     test('initial value should be correct', () {
-      final state = SimpleState<int>(0);
+      final state = EazyState<int>(0);
       expect(state.value, 0);
     });
 
     test('should update value correctly', () {
-      final state = SimpleState<int>(0);
+      final state = EazyState<int>(0);
       state.value = 1;
       expect(state.value, 1);
     });
 
     test('should emit new value on change', () async {
-      final state = SimpleState<int>(0);
+      final state = EazyState<int>(0);
       final values = <int>[state.value];
 
       // Listen to the stream and add values to the list

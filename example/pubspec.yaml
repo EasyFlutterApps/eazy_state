@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  simple_state:
-    path: ../../simple_state
+  eazy_state:
+    path: ../../eazy_state
 
 dev_dependencies:
   flutter_lints: ^4.0.0
