@@ -1,67 +1,193 @@
-# Simple State
+# Simple State Management
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
 
-A Very Good Project created by Very Good CLI.
+A lightweight and straightforward state management solution for Flutter applications, designed to manage and update UI state efficiently without the overhead of more complex state management tools.
+
+## Features
+- **SimpleState:** A class to manage a single piece of state with a stream-based approach.
+- **SimpleBuilder:** A widget that rebuilds itself when the state changes, using the power of StreamBuilder.
+- **Minimal API**: Easy to understand and integrate into any Flutter project.
+
 
 ## Installation 💻
 
-**❗ In order to start using Simple State you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
+Add the following dependency to your `pubspec.yaml` file:
 
-Install via `flutter pub add`:
-
-```sh
-dart pub add simple_state
+```yaml
+dependencies:
+  simple_state: ^1.0.0
 ```
 
----
+Then, run flutter pub get to install the package.
 
-## Continuous Integration 🤖
+## Usage
 
-Simple State comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+### SimpleState
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+SimpleState is a class that holds a value and provides a stream for updates. It allows you to manage state and notify listeners about changes.
 
----
+```dart
+import 'package:simple_state/simple_state.dart';
 
-## Running Tests 🧪
+final counterState = SimpleState(0);
 
-For first time users, install the [very_good_cli][very_good_cli_link]:
-
-```sh
-dart pub global activate very_good_cli
+void incrementCounter() {
+  counterState.value += 1;
+}
 ```
 
-To run all unit tests:
+### SimpleBuilder
 
-```sh
-very_good test --coverage
+SimpleBuilder is a widget that rebuilds when the SimpleState value changes. It listens to the SimpleState stream and rebuilds the UI based on the current state value.
+
+```dart
+import 'package:flutter/widgets.dart';
+import 'package:simple_state/simple_state.dart';
+
+class CounterWidget extends StatelessWidget {
+  final SimpleState<int> counterState;
+
+  const CounterWidget({required this.counterState});
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleBuilder<int>(
+      state: counterState,
+      builder: (context, count) {
+        return Text('$count');
+      },
+    );
+  }
+}
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+## Examples
 
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
+### Example 1: StatelessWidget
 
-# Open Coverage Report
-open coverage/index.html
+```dart
+import 'package:flutter/material.dart';
+import 'package:simple_state/simple_state.dart';
+
+final counterState = SimpleState(10.0);
+
+class MySimplePage extends StatelessWidget {
+  const MySimplePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Flutter Demo Home Page"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            SimpleBuilder(
+              state: counterState,
+              builder: (context, count) {
+                return Text(
+                  '$count',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MySimplePageSecond(),
+                  ),
+                );
+              },
+              child: const Text("Move"),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => counterState.value += 1,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
 ```
 
-[flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
-[mason_link]: https://github.com/felangel/mason
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
+### Example 2: StatefulWidget
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:simple_state/simple_state.dart';
+
+class MySimplePage extends StatefulWidget {
+  const MySimplePage({super.key});
+
+  @override
+  State<MySimplePage> createState() => _MySimplePageState();
+}
+
+class _MySimplePageState extends State<MySimplePage> {
+  final counterState = SimpleState(10.0);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Flutter Demo Home Page"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            SimpleBuilder(
+              state: counterState,
+              builder: (context, count) {
+                return Text(
+                  '$count',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MySimplePageSecond(),
+                  ),
+                );
+              },
+              child: const Text("Move"),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => counterState.value += 1,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+
+## Contributing
+
+Feel free to open issues or submit pull requests on GitHub.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/EasyFlutterApps/simple_state/blob/main/LICENSE) - see the LICENSE file for details.
