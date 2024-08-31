@@ -3,7 +3,6 @@ description: A lightweight and straightforward state management solution for Flu
 repository: https://github.com/EasyFlutterApps/eazy_state
 issue_tracker: https://github.com/EasyFlutterApps/eazy_state/issues
 version: 0.1.0+1
-publish_to: none
 
 environment:
   sdk: ^3.5.0
