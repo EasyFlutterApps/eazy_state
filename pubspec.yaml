@@ -1,8 +1,7 @@
 name: eazy_state
-description: A lightweight and straightforward state management solution for Flutter applications, designed to manage and update UI state efficiently without the overhead of more complex state management tools.
+description: A lightweight and straightforward state management solution for Flutter applications.
 repository: https://github.com/EasyFlutterApps/eazy_state
-issue_tracker: https://github.com/EasyFlutterApps/eazy_state/issues
-version: 0.1.0+1
+version: 0.1.1
 
 environment:
   sdk: ^3.5.0
