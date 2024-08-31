@@ -62,12 +62,9 @@ class CounterWidget extends StatelessWidget {
 
 ## Examples
 
-### Example 1: StatelessWidget
+### Example 1: Using Same State in Multiple Places
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:simple_state/simple_state.dart';
-
 final counterState = SimpleState(10.0);
 
 class MySimplePage extends StatelessWidget {
@@ -118,12 +115,9 @@ class MySimplePage extends StatelessWidget {
 }
 ```
 
-### Example 2: StatefulWidget
+### Example 2: Using State in Single Screen
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:simple_state/simple_state.dart';
-
 class MySimplePage extends StatefulWidget {
   const MySimplePage({super.key});
 
@@ -132,14 +126,20 @@ class MySimplePage extends StatefulWidget {
 }
 
 class _MySimplePageState extends State<MySimplePage> {
-  final counterState = SimpleState(10.0);
+  final counterState = SimpleState(10);
+
+  @override
+  void dispose() {
+    counterState.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Flutter Demo Home Page"),
+        title: const Text('Flutter Demo Home Page'),
       ),
       body: Center(
         child: Column(
@@ -164,7 +164,7 @@ class _MySimplePageState extends State<MySimplePage> {
                   ),
                 );
               },
-              child: const Text("Move"),
+              child: const Text('Move'),
             ),
           ],
         ),
