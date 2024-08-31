@@ -18,7 +18,7 @@ void main() {
 
     test('should emit new value on change', () async {
       final state = SimpleState<int>(0);
-      final values = <int>[0];
+      final values = <int>[state.value];
 
       // Listen to the stream and add values to the list
       final subscription = state.stream.listen(values.add);
