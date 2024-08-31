@@ -1,5 +1,7 @@
 name: simple_state
-description: A Very Good Project created by Very Good CLI.
+description: A lightweight and straightforward state management solution for Flutter applications, designed to manage and update UI state efficiently without the overhead of more complex state management tools.
+repository: https://github.com/EasyFlutterApps/simple_state
+issue_tracker: https://github.com/EasyFlutterApps/simple_state/issues
 version: 0.1.0+1
 publish_to: none
 
